@@ -20,6 +20,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     
-    # Add path for 'watchlist_app'
-    path('movies/', include('watchlist_app.urls')),
+    # Add path for 'watchlist_app/api/'
+    path('movies/', include('watchlist_app.api.urls')),
+    
+    
 ]
