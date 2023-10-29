@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     # Add path for 'watchlist_app/api/'
-    path('movies/', include('watchlist_app.api.urls')),
+    path('watch/', include('watchlist_app.api.urls')),
     
     
 ]

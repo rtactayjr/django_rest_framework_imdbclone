@@ -23,6 +23,33 @@ class StreamPlatformAV(APIView):
         else:
             return Response(serializer.errors)
         
+        
+class StreamPlatformDetailAV(APIView):
+    
+    def get(self, request,pk):
+        try:
+            platform = StreamPlatform.objects.get(pk=pk)
+        except StreamPlatform.DoesNotExist:
+            return Response({'Error': 'Movie not Found'}, status=status.HTTP_404_NOT_FOUND)
+            
+        serializer = StreamPlatformSerializer(platform)
+        return Response(serializer.data)
+    
+    def post(self, request, pk):
+        platform = StreamPlatform.objects.get(pk=pk)
+        serializer = StreamPlatformSerializer(platform, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            serializer.errors
+            
+    def delete(self, request, pk):
+        platform = StreamPlatform.objects.get(pk=pk)
+        platform.delete() 
+        return Response(status=status.HTTP_204_NO_CONTENT)
+        
+        
 class WatchListAV(APIView): #inherit APIView
     
     def get(self, request):
